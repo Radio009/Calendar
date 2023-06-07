@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+    <title>日历注册登录</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-box">
+            <!-- 注册 -->
+            <div class="register-box hidden">
+                <h1>register</h1>
+                <form action="./login.php" method="post" id="logForm">
+                    <input type="hidden" name="type"  value="1">
+                    <input type="text" placeholder="用户名" name="nname" id="nname">
+                    <input type="email" placeholder="邮箱" name="nemail" id="nemail">
+                    <input type="password" placeholder="密码" name="npwd" id="npwd">
+                    <input type="password" placeholder="确认密码" name="repwd" id="repwd">
+                    <span id="msg2" style="font-size:12px;color:red"></span><br>
+                </form>
+                <button type="button" id="logBtn">注册</button>
+            </div>
+            <!-- 登录 -->
+            <div class="login-box">
+                <h1>login</h1>
+                <form action="./login.php" method="post" id="loginForm">
+                    <input type="hidden" name="type"  value="2">
+                    <input type="text" placeholder="用户名" name="uname" id="uname">
+                    <input type="password" placeholder="密码" name="upwd" id="upwd">
+                    <span id="msg1" style="font-size:12px;color:red"></span><br>
+                </form>
+                <button type="button" id="loginBtn">登录</button>
+            </div>
+        </div>
+        <div class="con-box left">
+            <h2>欢迎来到<span>XX日历</span></h2>
+            <p>快来定制你的专属<span>日历</span>吧</p>
+            <img src="../images/cat/1.png" alt="">
+            <p>已有账号</p>
+            <button id="login">去登录</button>
+            <button onclick="window.location.href = '../Calendar-main/index.html'">返回</button>
+        </div>
+        <div class="con-box right">
+            <h2>欢迎来到<span>XX日历</span></h2>
+            <p>今天又有什么<span>事情</span>要干呢</p>
+            <img src="../images/cat/2.png" alt="">
+            <p>没有账号？</p>
+            <button id="register">去注册</button>
+            <button onclick="window.location.href = '../Calendar-main/index.html'">返回</button>
+        </div>
+    </div>
+    <script>
+        // 要操作到的元素
+        let login = document.getElementById('login');
+        let register = document.getElementById('register');
+        let form_box = document.getElementsByClassName('form-box')[0];
+        let register_box = document.getElementsByClassName('register-box')[0];
+        let login_box = document.getElementsByClassName('login-box')[0];
+        // 去注册按钮点击事件
+        register.addEventListener('click', () => {
+            form_box.style.transform = 'translateX(80%)';
+            login_box.classList.add('hidden');
+            register_box.classList.remove('hidden');
+        })
+        // 去登录按钮点击事件
+        login.addEventListener('click', () => {
+            form_box.style.transform = 'translateX(0%)';
+            register_box.classList.add('hidden');
+            login_box.classList.remove('hidden');
+        })
+    </script>
+    <script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        $("#loginBtn").click(function () {
+            var uname = $("#uname").val();
+            var upwd = $("#upwd").val();
+            if (isEmpty(uname)) {
+                $("#msg1").html("用户名不可为空");
+                return;
+            }
+            if (isEmpty(upwd)) {
+                $("#msg1").html("密码不可为空");
+                return;
+            }
+            $("#loginForm").submit();
+        }
+        );
+
+        $("#logBtn").click(function () {
+            var nname = $("#nname").val();
+            var nemail = $("#nemail").val();
+            var npwd = $("#npwd").val();
+            var repwd = $("#repwd").val();
+            if (isEmpty(nname)) {
+                $("#msg2").html("用户名不可为空");
+                return;
+            }
+            if (isEmpty(nemail)) {
+                $("#msg2").html("邮箱不可为空");
+                return;
+            }
+            if (isEmpty(npwd)) {
+                $("#msg2").html("密码不可为空");
+                return;
+            }
+            if (isEmpty(repwd)) {
+                $("#msg2").html("确认密码不可为空");
+                return;
+            }
+            $("#logForm").submit();
+        }
+        );
+
+        function isEmpty(str) {
+            if (str == null || str.trim() == "") {
+                return true;
+            }
+            return false;
+        }
+    </script>
+</body>
+
+</html>
